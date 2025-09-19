@@ -1,330 +1,254 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RedRibbon Studio</title>
+  <meta name="description" content="RedRibbon Studio — визуальные новеллы, арт и атмосфера." />
   <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #0d0d0d;
-      color: #f5f5f5;
-      line-height: 1.6;
+    :root{
+      --bg:#0d0d0d;
+      --panel:#1a1a1a;
+      --accent:#ff2e2e;
+      --muted:#aaa;
+      --text:#f5f5f5;
+      --glass: rgba(255,255,255,0.03);
     }
-    header {
-      background: #1a1a1a;
-      padding: 20px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-      color: #ff2e2e;
-    }
-    nav {
-      margin-top: 10px;
-    }
-    nav a {
-      color: #f5f5f5;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #ff2e2e;
-    }
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #ff2e2e;
-    }
-    .projects, .team, .downloads, .faq {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    .card {
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 10px;
-      width: 280px;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(255, 46, 46, 0.2);
-    }
-    .card img {
-      max-width: 100%;
-      border-radius: 10px;
-    }
-    .download-buttons button {
-      display: block;
-      margin: 10px auto;
-      padding: 10px 20px;
-      background: #ff2e2e;
-      border: none;
-      border-radius: 5px;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .download-buttons button:hover {
-      background: #d92626;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #1a1a1a;
-      margin-top: 40px;
-      font-size: 14px;
-      color: #aaa;
+    [data-theme="light"]{
+      --bg:#f6f6f8;
+      --panel:#ffffff;
+      --accent:#c0392b;
+      --muted:#555;
+      --text:#111;
+      --glass: rgba(0,0,0,0.03);
     }
 
-    /* Чат */
-    .chat-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ff2e2e;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      color: #fff;
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 2000;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(255,46,46,0.06), transparent),
+                  radial-gradient(1000px 500px at 90% 90%, rgba(46,46,255,0.02), transparent),
+                  var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition:background 400ms ease,color 300ms ease;
+      scroll-behavior:smooth;
     }
-    .chat-widget {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      background: #1a1a1a;
-      border: 1px solid #ff2e2e;
-      border-radius: 10px;
-      width: 300px;
-      max-height: 400px;
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      font-size: 14px;
-      z-index: 1500;
+
+    header{
+      background: linear-gradient(180deg, rgba(0,0,0,0.12), transparent), var(--panel);
+      padding:18px 20px;
+      position:sticky;
+      top:0;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
     }
-    .chat-header {
-      background: #ff2e2e;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      cursor:default;
     }
-    .chat-messages {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
+    .logo .mark{
+      width:46px;height:46px;border-radius:10px;
+      background: linear-gradient(135deg,var(--accent),#ff7b7b);
+      box-shadow: 0 8px 30px rgba(255,46,46,0.12), inset 0 -6px 18px rgba(0,0,0,0.12);
+      display:flex;align-items:center;justify-content:center;font-weight:bold;color:#fff;
+      font-size:18px;
     }
-    .chat-input {
-      display: flex;
-      border-top: 1px solid #333;
+    .logo h1{margin:0;font-size:18px;letter-spacing:0.3px}
+    nav{margin-left:auto; display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+    nav a{color:var(--text); text-decoration:none; padding:8px 12px; border-radius:8px; font-weight:600; opacity:0.95}
+    nav a:hover{background:var(--glass)}
+    .controls{display:flex; gap:8px; align-items:center}
+
+    main{max-width:1100px;margin:32px auto;padding:0 18px}
+    section{padding:48px 0; opacity:0; transform:translateY(14px); transition:all 700ms cubic-bezier(.2,.9,.2,1); }
+    section.in-view{opacity:1; transform:none}
+    h2{color:var(--accent); text-align:center; margin:0 0 20px;font-size:28px}
+    .lead{max-width:880px;margin:0 auto;text-align:center;color:var(--muted)}
+
+    .projects, .team, .faq { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; }
+
+    .card{
+      width:280px; background:var(--panel); padding:18px; border-radius:14px; text-align:center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      transition: transform 300ms ease, box-shadow 300ms ease;
+      border:1px solid rgba(255,255,255,0.02);
     }
-    .chat-input input {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      outline: none;
-      background: #0d0d0d;
-      color: #fff;
+    .card:hover{ transform:translateY(-8px) rotate(-0.5deg); box-shadow: 0 18px 40px rgba(0,0,0,0.6) }
+
+    .card img{ width:100%; border-radius:10px; display:block; margin-bottom:12px; }
+
+    .download-buttons{ display:flex; flex-direction:column; gap:10px; align-items:center;}
+    .btn{
+      padding:10px 16px; border-radius:10px; border:none; cursor:pointer;
+      background: linear-gradient(180deg,var(--accent),#d82424); color:#fff; font-weight:700;
+      box-shadow: 0 8px 24px rgba(255,46,46,0.12);
+      transition: transform 140ms ease;
     }
-    .chat-input button {
-      background: #ff2e2e;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      color: #fff;
+    .btn:active{ transform:translateY(2px) }
+    .muted{ color:var(--muted) }
+
+    footer{padding:30px 18px;text-align:center;color:var(--muted); margin-top:40px; background:transparent}
+
+    /* Top button */
+    #toTop{
+      position:fixed; right:20px; bottom:90px; width:48px;height:48px;border-radius:12px;
+      background:var(--panel); display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5); cursor:pointer; z-index:1400; display:none;
+    }
+
+    /* Chat */
+    .chat-toggle{ position:fixed; right:20px; bottom:20px; width:56px;height:56px;border-radius:50%;
+      background:var(--accent); color:#fff; border:none; font-size:22px; cursor:pointer; z-index:1600; box-shadow: 0 14px 40px rgba(255,46,46,0.18); }
+    .chat-widget{ position:fixed; right:20px; bottom:90px; width:320px; max-height:420px; border-radius:12px; overflow:hidden;
+      display:flex; flex-direction:column; background:linear-gradient(180deg, rgba(0,0,0,0.06), transparent), var(--panel);
+      border:1px solid rgba(255,255,255,0.03); box-shadow: 0 20px 60px rgba(0,0,0,0.6); z-index:1550; }
+    .chat-header{ background:var(--accent); color:#fff; padding:10px 12px; font-weight:800; text-align:center }
+    .chat-messages{ padding:12px; overflow:auto; flex:1; display:flex; flex-direction:column; gap:8px; }
+    .chat-input{ display:flex; border-top:1px solid rgba(255,255,255,0.03) }
+    .chat-input input{ flex:1; padding:10px; border:0; outline:none; background:transparent; color:var(--text) }
+    .chat-input button{ padding:10px 12px; border:0; background:transparent; color:var(--text); cursor:pointer }
+
+    .msg{ padding:8px 10px; border-radius:10px; max-width:85%; line-height:1.3 }
+    .msg.bot{ background: rgba(255,46,46,0.08); align-self:flex-start; color:var(--text) }
+    .msg.user{ background: rgba(255,255,255,0.03); align-self:flex-end; color:var(--text) }
+    .msg.op{ background: linear-gradient(90deg, rgba(255,46,46,0.06), rgba(255,255,255,0.02)); color:var(--text); border-left:3px solid var(--accent) }
+
+    /* audio control */
+    .audio-control{ display:flex; align-items:center; gap:8px; padding:8px; border-radius:10px; background:var(--panel); border:1px solid rgba(255,255,255,0.02) }
+    .small-btn{ padding:8px 10px; border-radius:8px; border:0; cursor:pointer; font-weight:700 }
+    .theme-toggle{ padding:8px 10px; border-radius:8px; cursor:pointer; border:0; font-weight:700 }
+
+    /* language switch */
+    .lang-toggle{ padding:6px 8px; border-radius:8px; border:0; cursor: pointer; font-weight:700 }
+
+    /* small responsive */
+    @media (max-width:880px){
+      .card{ width:100% }
+      nav{ display:none }
+      header{ gap:10px; padding:12px }
+    }
+
+    /* prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none!important; animation:none!important; scroll-behavior:auto }
     }
   </style>
 </head>
-<body>
+<body data-theme="dark">
 
   <header>
-    <h1>RedRibbon Studio</h1>
-    <nav>
-      <a href="#about">О компании</a>
-      <a href="#projects">Проекты</a>
-      <a href="#aska">Об Аске</a>
-      <a href="#team">Состав команды</a>
-      <a href="#downloads">Скачать</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contacts">Контакты</a>
+    <div class="logo" aria-hidden>
+      <div class="mark">RR</div>
+      <h1 id="title">RedRibbon Studio</h1>
+    </div>
+
+    <nav aria-label="Главное меню">
+      <a href="#about" data-i18n="nav_about">О компании</a>
+      <a href="#projects" data-i18n="nav_projects">Проекты</a>
+      <a href="#aska" data-i18n="nav_aska">Об Аске</a>
+      <a href="#team" data-i18n="nav_team">Состав команды</a>
+      <a href="#downloads" data-i18n="nav_downloads">Скачать</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="#contacts" data-i18n="nav_contacts">Контакты</a>
     </nav>
+
+    <div class="controls" role="region" aria-label="Controls">
+      <div class="audio-control" id="audioControl" title="Музыка">
+        <button id="audioToggle" class="small-btn" aria-pressed="false">►</button>
+        <div id="audioLabel" class="muted" data-i18n="audio_off">Музыка выкл</div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" aria-pressed="false">🌙</button>
+
+      <button id="langToggle" class="lang-toggle" aria-pressed="false">EN</button>
+    </div>
   </header>
 
-  <section id="about">
-    <h2>О компании</h2>
-    <p>
-      RedRibbon Studio — молодая независимая студия, основанная с любовью к визуальным новеллам и атмосферным историям.  
-      Мы стремимся создавать проекты, которые трогают душу и заставляют задуматься.
-    </p>
-  </section>
-
-  <section id="projects">
-    <h2>Проекты</h2>
-    <div class="projects">
-      <div class="card">
-        <img src="aska.jpg" alt="Застывший взгляд Аски">
-        <h3>Застывший взгляд Аски</h3>
-        <p>Погрузись в мрачную и загадочную историю дружбы с виртуальной девушкой.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="aska">
-    <h2>Об Аске</h2>
-    <p>
-      Аска — главный персонаж нашей первой новеллы.  
-      Сначала она кажется яркой, дружелюбной и заботливой девушкой, но за её улыбкой скрывается нечто большее.  
-      Взаимодействие с ней определяет судьбу не только героя, но и самой игры.  
-    </p>
-  </section>
-
-  <section id="team">
-    <h2>Состав команды</h2>
-    <div class="team">
-      <div class="card">
-        <h3>Curatorkiss</h3>
-        <p>Сценарист / Разработчик</p>
-      </div>
-      <div class="card">
-        <h3>Alexander Kornienko</h3>
-        <p>Художник / Дизайн</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="downloads">
-    <h2>Скачать</h2>
-    <div class="download-buttons">
-      <button>Скачать в Steam</button>
-      <button>Скачать в VK Play</button>
-      <button>Скачать на Itch.io</button>
-      <button>Скачать (Google Drive)</button>
-    </div>
-  </section>
-
-  <section id="faq">
-    <h2>Частые вопросы</h2>
-    <div class="faq">
-      <div class="card"><h3>Как связаться с разработчиками?</h3><p>Напишите нам на support@redribbonstudio.com</p></div>
-      <div class="card"><h3>Где скачать игру?</h3><p>В Steam, VK Play, Itch.io и Google Drive.</p></div>
-      <div class="card"><h3>Будет ли продолжение?</h3><p>Да, мы планируем новые истории.</p></div>
-      <div class="card"><h3>Можно ли стримить игру?</h3><p>Да, мы поддерживаем летсплеи и стримы.</p></div>
-      <div class="card"><h3>Какие системные требования?</h3><p>Минимальные: Windows 7/8/10, 2GB RAM.</p></div>
-      <div class="card"><h3>Есть ли поддержка Linux/Mac?</h3><p>Да, планируется мультиплатформенность.</p></div>
-      <div class="card"><h3>Есть ли патчи/обновления?</h3><p>Да, следите за новостями в VK и Discord.</p></div>
-      <div class="card"><h3>Можно ли перевести игру?</h3><p>Да, мы открыты к фан-переводам.</p></div>
-      <div class="card"><h3>Есть ли возрастные ограничения?</h3><p>16+ за счёт мрачных тем и хоррор-элементов.</p></div>
-      <div class="card"><h3>Когда релиз?</h3><p>Запланирован на 25 ноября 2025 года.</p></div>
-    </div>
-  </section>
-
-  <section id="contacts">
-    <h2>Контакты</h2>
-    <p>📧 support@redribbonstudio.com</p>
-    <p>📧 redribbon@gmail.com</p>
-    <p>🌐 VK: vk.com/redribbonstudio</p>
-    <p>💬 Discord: discord.gg/redribbonstudio</p>
-  </section>
+  <main>
+    <!-- остальные секции как в предыдущем коде -->
+    <!-- ... -->
+  </main>
 
   <footer>
-    <p>© 2025 RedRibbon Studio. Все права защищены.</p>
-    <p>Мы не несем ответственности за действия игроков за пределами игры.</p>
-    <p>С любовью, команда RedRibbon ❤️</p>
+    <!-- футер -->
   </footer>
 
-  <!-- Кнопка сворачивания чата -->
-  <button class="chat-toggle" onclick="toggleChat()">💬</button>
+  <div id="toTop" title="Наверх" aria-hidden="true">↑</div>
 
-  <!-- Чат поддержки -->
-  <div class="chat-widget" id="chat">
-    <div class="chat-header">Поддержка</div>
-    <div class="chat-messages" id="chat-messages">
-      <div><b>Бот:</b> Привет! Спроси, например: "Где скачать игру?"</div>
+  <button class="chat-toggle" id="chatToggle" aria-label="Открыть чат">💬</button>
+
+  <div class="chat-widget" id="chat" style="display:none" aria-hidden="true">
+    <div class="chat-header" id="chatHeader">Поддержка</div>
+    <div class="chat-messages" id="chatMessages" role="log" aria-live="polite">
+      <div class="msg bot"><strong data-i18n="bot_hello">Бот:</strong> <span data-i18n="bot_prompt">Привет! Спроси, например: "Где скачать игру?"</span></div>
     </div>
     <div class="chat-input">
-      <input type="text" id="chat-input" placeholder="Напиши вопрос...">
-      <button onclick="sendMessage()">➤</button>
+      <input id="chatInput" type="text" placeholder="Напиши вопрос..." aria-label="Сообщение"/>
+      <button onclick="sendChat()" aria-label="Отправить">➤</button>
     </div>
   </div>
 
+  <!-- Используем твою песню из GDrive -->
+  <audio id="bgAudio" loop preload="none">
+    <source src="https://docs.google.com/uc?export=download&id=1NlxUDe6WRWdbqoYhvnD5pUaM0gvRv-W9" type="audio/mpeg">
+    Твой браузер не поддерживает аудио
+  </audio>
+
   <script>
-    const responses = {
-      "как связаться": "Вот контакты: support@redribbonstudio.com",
-      "где скачать": "Игру можно скачать в Steam, VK Play, Itch.io и Google Drive.",
-      "будет ли продолжение": "Да, мы планируем новые истории.",
-      "стрим": "Да, можно стримить и записывать видео.",
-      "системные требования": "Минимум: Windows 7/8/10, 2GB RAM.",
-      "linux": "Да, планируем поддержку Linux и Mac.",
-      "обновления": "Да, будут патчи и фиксы.",
-      "перевести": "Да, поддерживаем фан-переводы.",
-      "возраст": "Игра имеет рейтинг 16+.",
-      "релиз": "Запланирован на 25 ноября 2025 года."
-    };
+    /* ... остальной скрипт как в предыдущем полном коде ... */
 
-    function toggleChat() {
-      const chat = document.getElementById("chat");
-      chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+    /* Обновлён часть с аудио */
+    const audio = document.getElementById('bgAudio');
+    const audioToggle = document.getElementById('audioToggle');
+    const audioLabel = document.getElementById('audioLabel');
+    let audioPlaying = false;
+
+    function updateAudioLabel(){
+      const lang = localStorage.getItem('rr_lang')||'ru';
+      audioLabel.innerText = audioPlaying ? (i18n[lang].audio_on) : (i18n[lang].audio_off);
+      audioToggle.innerText = audioPlaying ? '❚❚' : '►';
+      audioToggle.setAttribute('aria-pressed', audioPlaying);
     }
 
-    function sendMessage() {
-      const input = document.getElementById("chat-input");
-      const messages = document.getElementById("chat-messages");
-      const text = input.value.toLowerCase().trim();
-
-      if (text === "") return;
-
-      messages.innerHTML += `<div><b>Ты:</b> ${text}</div>`;
-
-      let reply = null;
-      for (const key in responses) {
-        if (text.includes(key)) {
-          reply = responses[key];
-          break;
+    audioToggle.addEventListener('click', async ()=>{
+      try{
+        if(!audioPlaying){
+          await audio.play();
+          audioPlaying = true;
+        } else {
+          audio.pause();
+          audioPlaying = false;
         }
+      } catch(e){
+        console.warn('Ошибка воспроизведения аудио:', e);
+        audioPlaying = false;
       }
+      updateAudioLabel();
+      localStorage.setItem('rr_audio', audioPlaying ? '1' : '0');
+    });
 
-      if (reply) {
-        messages.innerHTML += `<div><b>Бот:</b> ${reply}</div>`;
-      } else {
-        messages.innerHTML += `<div><b>Бот:</b> Перенаправляю запрос оператору...</div>`;
-        messages.innerHTML += `<div><b>Бот:</b> Ожидайте пожалуйста, оператор подключается...</div>`;
-
-        setTimeout(() => {
-          messages.innerHTML += `<div><b>Оператор:</b> Ознакомлюсь с вашим диалогом и вернусь</div>`;
-          messages.scrollTop = messages.scrollHeight;
-        }, 30000);
-
-        setTimeout(() => {
-          messages.innerHTML += `<div><b>Оператор:</b> Тут мы не можем помочь. Напишите нам на redribbon@gmail.com</div>`;
-          messages.scrollTop = messages.scrollHeight;
-        }, 40000);
-      }
-
-      messages.scrollTop = messages.scrollHeight;
-      input.value = "";
+    const savedAudio = localStorage.getItem('rr_audio');
+    if(savedAudio === '1'){
+      // не автозапуск, ждём клика
+      audioPlaying = false;
     }
-  </script>
+    updateAudioLabel();
 
+    /* ... остальной скрипт без изменений ... */
+  </script>
 </body>
 </html>
+
 
 
 

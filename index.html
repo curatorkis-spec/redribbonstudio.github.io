@@ -3,87 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RedRibbon Studio — Застывший взгляд Аски</title>
+  <title>RedRibbon Studio</title>
   <style>
+    * {margin:0; padding:0; box-sizing:border-box;}
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0a0a;
-      color: #f2f2f2;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0d0d0d;
+      color: #fff;
+      line-height: 1.6;
+    }
+    header {
+      background: #1a1a1a;
+      padding: 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      color: #e63946;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #e63946;
+    }
+    section {
+      padding: 100px 20px;
+      min-height: 100vh;
+    }
+    .hero {
+      background: linear-gradient(to right, #e63946, #1a1a1a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       text-align: center;
     }
-
-    header {
-      padding: 50px 20px;
-      background: linear-gradient(135deg, #330033, #111);
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
     }
-
-    h1 {
-      font-size: 2.8em;
-      margin: 0;
-      color: #ff3366;
-    }
-
-    h2 {
-      margin-top: 15px;
-      font-weight: normal;
-      color: #aaa;
-    }
-
-    section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-
-    p {
-      line-height: 1.6em;
-      font-size: 1.1em;
-    }
-
-    .button {
+    .btn {
       display: inline-block;
-      margin-top: 25px;
-      padding: 14px 28px;
-      font-size: 1.2em;
-      color: white;
-      background: #ff3366;
-      border-radius: 8px;
+      padding: 10px 20px;
+      background: #e63946;
+      color: #fff;
+      border-radius: 5px;
       text-decoration: none;
       transition: background 0.3s;
     }
-
-    .button:hover {
-      background: #ff0033;
+    .btn:hover {
+      background: #b71c1c;
     }
-
+    .projects, .team, .downloads, .contact {
+      background: #1a1a1a;
+      margin-top: 20px;
+      border-radius: 10px;
+      padding: 30px;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #e63946;
+    }
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .member {
+      background: #262626;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .member h3 {margin-bottom: 10px;}
     footer {
-      margin-top: 60px;
-      padding: 20px;
-      font-size: 0.9em;
-      color: #666;
+      background: #111;
+      text-align: center;
+      padding: 15px;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>RedRibbon Studio</h1>
-    <h2>Застывший взгляд Аски</h2>
+    <nav>
+      <ul>
+        <li><a href="#hero">Главная</a></li>
+        <li><a href="#projects">Проекты</a></li>
+        <li><a href="#team">Команда</a></li>
+        <li><a href="#downloads">Скачать</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <section>
-    <p>
-      Атмосферная визуальная новелла с элементами психологического триллера.  
-      Здесь реальность и игра переплетаются, а твой выбор меняет больше, чем ты думаешь.  
-    </p>
+  <section id="hero" class="hero">
+    <h2>Добро пожаловать в RedRibbon Studio</h2>
+    <p>Мы создаём уникальные игры с душой ❤️</p>
+    <a href="#projects" class="btn">Наши проекты</a>
+  </section>
 
-    <a class="button" href="https://vkplay.ru/play/game_url" target="_blank">Играть на VK Play</a>
+  <section id="projects" class="projects">
+    <h2>🎮 Наши проекты</h2>
+    <p><strong>Project A:</strong> Визуальная новелла с Аской (релиз: 25 ноября).</p>
+    <p><strong>Project B:</strong> В разработке...</p>
+  </section>
+
+  <section id="team" class="team">
+    <h2>👥 Наша команда</h2>
+    <div class="team-members">
+      <div class="member">
+        <h3>Ты</h3>
+        <p>Разработчик, сценарист</p>
+      </div>
+      <div class="member">
+        <h3>RedRibbon Studio</h3>
+        <p>Независимая инди-команда</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="downloads" class="downloads">
+    <h2>📥 Скачать игру</h2>
+    <p>Скоро будет доступно на <strong>itch.io</strong> и <strong>Steam</strong>.</p>
+    <a href="#" class="btn">Скачать (demo)</a>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>✉️ Контакты</h2>
+    <p>Email: <a href="mailto:redribbonstudio@gmail.com">redribbonstudio@gmail.com</a></p>
+    <p>Twitter: <a href="#">@RedRibbonStudio</a></p>
+    <p>Discord: <a href="#">Вступить в сообщество</a></p>
   </section>
 
   <footer>
-    © 2025 RedRibbon Studio. Все права защищены.
+    <p>© 2025 RedRibbon Studio. Все права защищены.</p>
   </footer>
-
 </body>
 </html>
+

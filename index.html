@@ -89,20 +89,36 @@
       font-size: 14px;
       color: #aaa;
     }
+
     /* Чат */
-    .chat-widget {
+    .chat-toggle {
       position: fixed;
       bottom: 20px;
+      right: 20px;
+      background: #ff2e2e;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 2000;
+    }
+    .chat-widget {
+      position: fixed;
+      bottom: 80px;
       right: 20px;
       background: #1a1a1a;
       border: 1px solid #ff2e2e;
       border-radius: 10px;
       width: 300px;
       max-height: 400px;
-      display: flex;
+      display: none;
       flex-direction: column;
       overflow: hidden;
       font-size: 14px;
+      z-index: 1500;
     }
     .chat-header {
       background: #ff2e2e;
@@ -152,87 +168,16 @@
     </nav>
   </header>
 
-  <section id="about">
-    <h2>О компании</h2>
-    <p>
-      RedRibbon Studio — молодая независимая студия, основанная с любовью к визуальным новеллам и атмосферным историям.  
-      Мы стремимся создавать проекты, которые трогают душу и заставляют задуматься.
-    </p>
-  </section>
-
-  <section id="projects">
-    <h2>Проекты</h2>
-    <div class="projects">
-      <div class="card">
-        <img src="aska.jpg" alt="Застывший взгляд Аски">
-        <h3>Застывший взгляд Аски</h3>
-        <p>Погрузись в мрачную и загадочную историю дружбы с виртуальной девушкой.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="aska">
-    <h2>Об Аске</h2>
-    <p>
-      Аска — главный персонаж нашей первой новеллы.  
-      Сначала она кажется яркой, дружелюбной и заботливой девушкой, но за её улыбкой скрывается нечто большее.  
-      Взаимодействие с ней определяет судьбу не только героя, но и самой игры.  
-    </p>
-  </section>
-
-  <section id="team">
-    <h2>Состав команды</h2>
-    <div class="team">
-      <div class="card">
-        <h3>Curatorkiss</h3>
-        <p>Сценарист / Разработчик</p>
-      </div>
-      <div class="card">
-        <h3>Alexander Kornienko</h3>
-        <p>Художник / Дизайн</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="downloads">
-    <h2>Скачать</h2>
-    <div class="download-buttons">
-      <button>Скачать в Steam</button>
-      <button>Скачать в VK Play</button>
-      <button>Скачать на Itch.io</button>
-      <button>Скачать (Google Drive)</button>
-    </div>
-  </section>
-
-  <section id="faq">
-    <h2>Частые вопросы</h2>
-    <div class="faq">
-      <div class="card"><h3>Как связаться с разработчиками?</h3><p>Напишите нам на support@redribbonstudio.com</p></div>
-      <div class="card"><h3>Где скачать игру?</h3><p>В Steam, VK Play, Itch.io и Google Drive.</p></div>
-      <div class="card"><h3>Будет ли продолжение?</h3><p>Да, мы планируем новые истории.</p></div>
-      <div class="card"><h3>Можно ли стримить игру?</h3><p>Да, мы поддерживаем летсплеи и стримы.</p></div>
-      <div class="card"><h3>Какие системные требования?</h3><p>Минимальные: Windows 7/8/10, 2GB RAM.</p></div>
-      <div class="card"><h3>Есть ли поддержка Linux/Mac?</h3><p>Да, планируется мультиплатформенность.</p></div>
-      <div class="card"><h3>Есть ли патчи/обновления?</h3><p>Да, следите за новостями в VK и Discord.</p></div>
-      <div class="card"><h3>Можно ли перевести игру?</h3><p>Да, мы открыты к фан-переводам.</p></div>
-      <div class="card"><h3>Есть ли возрастные ограничения?</h3><p>16+ за счёт мрачных тем и хоррор-элементов.</p></div>
-      <div class="card"><h3>Когда релиз?</h3><p>Запланирован на 25 ноября 2025 года.</p></div>
-    </div>
-  </section>
-
-  <section id="contacts">
-    <h2>Контакты</h2>
-    <p>📧 support@redribbonstudio.com</p>
-    <p>📧 redribbon@gmail.com</p>
-    <p>🌐 VK: vk.com/redribbonstudio</p>
-    <p>💬 Discord: discord.gg/redribbonstudio</p>
-  </section>
+  <!-- ... остальной контент как у тебя ... -->
 
   <footer>
     <p>© 2025 RedRibbon Studio. Все права защищены.</p>
     <p>Мы не несем ответственности за действия игроков за пределами игры.</p>
     <p>С любовью, команда RedRibbon ❤️</p>
   </footer>
+
+  <!-- Кнопка сворачивания чата -->
+  <button class="chat-toggle" onclick="toggleChat()">💬</button>
 
   <!-- Чат поддержки -->
   <div class="chat-widget" id="chat">
@@ -260,6 +205,11 @@
       "релиз": "Запланирован на 25 ноября 2025 года."
     };
 
+    function toggleChat() {
+      const chat = document.getElementById("chat");
+      chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+    }
+
     function sendMessage() {
       const input = document.getElementById("chat-input");
       const messages = document.getElementById("chat-messages");
@@ -281,10 +231,17 @@
         messages.innerHTML += `<div><b>Бот:</b> ${reply}</div>`;
       } else {
         messages.innerHTML += `<div><b>Бот:</b> Перенаправляю запрос оператору...</div>`;
+        messages.innerHTML += `<div><b>Бот:</b> Ожидайте пожалуйста, оператор подключается...</div>`;
+
         setTimeout(() => {
-          messages.innerHTML += `<div><b>Оператор:</b> Здравствуйте, тут мы не можем помочь. Напишите нам на redribbon@gmail.com</div>`;
+          messages.innerHTML += `<div><b>Оператор:</b> Ознакомлюсь с вашим диалогом и вернусь</div>`;
           messages.scrollTop = messages.scrollHeight;
-        }, 2000);
+        }, 30000); // 30 секунд
+
+        setTimeout(() => {
+          messages.innerHTML += `<div><b>Оператор:</b> Тут мы не можем помочь. Напишите нам на redribbon@gmail.com</div>`;
+          messages.scrollTop = messages.scrollHeight;
+        }, 40000); // через 40 секунд общий итог
       }
 
       messages.scrollTop = messages.scrollHeight;

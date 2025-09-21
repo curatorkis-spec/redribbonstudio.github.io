@@ -158,7 +158,7 @@
     <h2 data-i18n="projects.title">Проекты</h2>
     <div class="grid cols-3">
       <div class="card">
-        <div class="project-thumb" id="aska-thumb">Арт: Застывший взгляд Аски (замени картинку)</div>
+        <div class="project-thumb" id="aska-thumb">Арт: Застывший взгляд Аски</div>
         <h3 data-i18n="project1.title">Застывший взгляд Аски</h3>
         <p data-i18n="project1.desc">Мрачная история дружбы с виртуальной девушкой, которая знает больше, чем кажется.</p>
         <div style="margin-top:10px">
@@ -184,7 +184,7 @@
     <h2 data-i18n="aska.title">Об Аске</h2>
     <div class="card">
       <p data-i18n="aska.text">Аска — главный персонаж нашей первой новеллы. Яркая, внимательная и порой загадочная. Она создана, чтобы быть другом, но в ней скрывается больше, чем кажется на первый взгляд.</p>
-      <div style="margin-top:12px;color:var(--muted);font-size:14px" data-i18n="aska.note">(Здесь можно добавить артов/анимаций персонажа и версии её «багованного» образа)</div>
+      <div style="margin-top:12px;color:var(--muted);font-size:14px" data-i18n="aska.note">(Скоро...)</div>
     </div>
   </section>
 
@@ -226,7 +226,7 @@
         <a href="#" class="download-btn" data-platform="itch" data-i18n="downloads.itch">Itch.io</a>
         <a href="#" class="download-btn" data-platform="gdrive" data-i18n="downloads.drive">Google Drive</a>
       </div>
-      <p style="margin-top:10px;color:var(--muted)" data-i18n="downloads.note">Кнопки ведут на заглушки — замените ссылки на реальные релизы.</p>
+      <p style="margin-top:10px;color:var(--muted)" data-i18n="downloads.note">Пока нету.</p>
     </div>
   </section>
 
@@ -234,10 +234,10 @@
   <section id="trailer">
     <h2 data-i18n="trailer.title">Трейлер игры</h2>
     <div class="trailer card">
-      <div class="placeholder" id="trailer-placeholder" data-i18n="trailer.placeholder">Здесь будет трейлер — загрузи видео или вставь iframe YouTube/ВК</div>
+      <div class="placeholder" id="trailer-placeholder" data-i18n="trailer.placeholder">Здесь будет трейлер, но его ещё нет :(К</div>
       <div style="min-width:220px;">
-        <p data-i18n="trailer.note">Место под видео. Рекомендуется 16:9 и 720p+</p>
-        <p style="margin-top:8px"><a class="btn" href="#" data-i18n="trailer.upload">Загрузить трейлер</a></p>
+        <p data-i18n="trailer.note">Уже скоро...+</p>
+        <p style="margin-top:8px"><a class="btn" href="#" data-i18n="trailer.upload">Релиз скоро</a></p>
       </div>
     </div>
   </section>
@@ -248,7 +248,7 @@
     <div class="card faq">
       <div>
         <div class="q" data-key="q1" data-i18n="faq.q1">Как связаться с разработчиками?</div>
-        <div class="a" data-key="a1" data-i18n="faq.a1">Почта: support@redribbonstudio.com. Discord: discord.gg/redribbonstudio</div>
+        <div class="a" data-key="a1" data-i18n="faq.a1">Почта: rribbonstudio@gmail.com. Discord: discord.gg/redribbonstudio</div>
 
         <div class="q" data-key="q2" data-i18n="faq.q2">Где можно скачать игру?</div>
         <div class="a" data-key="a2" data-i18n="faq.a2">Игра публикуется на Steam, VK Play, Itch.io и Google Drive.</div>
@@ -284,7 +284,7 @@
   <section id="contacts">
     <h2 data-i18n="contacts.title">Контакты</h2>
     <div class="card">
-      <p><strong data-i18n="contacts.mail">Почта:</strong> <a href="mailto:support@redribbonstudio.com">support@redribbonstudio.com</a></p>
+      <p><strong data-i18n="contacts.mail">Почта:</strong> <a href="mailto:rribbonstudio@gmail.com">rribbonstudio@gmail.com</a></p>
       <p><strong data-i18n="contacts.vk">VK:</strong> <a href="https://vk.com/redribbonstudio" target="_blank">vk.com/redribbonstudio</a></p>
       <p><strong data-i18n="contacts.discord">Discord:</strong> <span>discord.gg/redribbonstudio</span></p>
       <p style="margin-top:12px;color:var(--muted)" data-i18n="contacts.notice">Ответы в рабочее время: 10:00–19:00 (МСК)</p>
@@ -441,14 +441,14 @@ document.querySelectorAll(".faq .q").forEach(q=>{
    ========================= */
 const canned = {
   ru: {
-    "как связаться":"Пиши на support@redribbonstudio.com",
+    "как связаться":"Пиши на rribbonstudio@gmail.com",
     "где скачать":"Скоро на Steam, VK Play, Itch.io",
     "сколько стоит":"Цена будет объявлена ближе к релизу",
     "будет ли продолжение":"Да, мы планируем расширять вселенную",
     "стрим":"Да, стримить можно"
   },
   en: {
-    "contact":"Email support@redribbonstudio.com",
+    "contact":"Email rribbonstudio@gmail.com,
     "where download":"Soon on Steam, VK Play, Itch.io",
     "price":"Price will be announced near release",
     "sequel":"Yes, we plan to expand the universe",
@@ -465,7 +465,7 @@ function appendMsg(who, text){
 }
 
 function operatorFallback(){
-  appendMsg("bot", locale==='en' ? "Hello, we cannot answer this automatically. Please contact: redribbon@gmail.com" : "Здравствуйте, тут мы не можем помочь. Напишите нам на redribbon@gmail.com");
+  appendMsg("bot", locale==='en' ? "Hello, we cannot answer this automatically. Please contact: rribbonstudio@gmail.com" : "Здравствуйте, тут мы не можем помочь. Напишите нам на rribbonstudio@gmail.com");
 }
 
 chatSend.addEventListener("click", ()=>{
@@ -495,7 +495,7 @@ chatInput.addEventListener("keydown", e=>{
 
 /* quick replace placeholders (optional) */
 document.getElementById("aska-thumb").addEventListener("click", ()=>{
-  alert(locale==='en' ? "Replace this placeholder with your artwork file (PNG/JPG)." : "Замените этот плейсхолдер на ваш артовый файл (PNG/JPG).");
+  alert(locale==='en' ? "Replace this placeholder with your artwork file (PNG/JPG)." : (PNG/JPG).");
 });
 
 /* Accessibility: focus first interactive */
@@ -508,6 +508,7 @@ langSelect.setAttribute("aria-label","Language select");
 </script>
 </body>
 </html>
+
 
 
 
